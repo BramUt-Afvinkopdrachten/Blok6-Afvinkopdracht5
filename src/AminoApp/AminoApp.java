@@ -24,11 +24,13 @@ public class AminoApp extends JFrame {
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e -> {
             String inputText = inputField.getText();
-            // Zorgt dat case niet uit maakt.
             try{
+                // Maakt eerste character uppercase en de rest lowercase.
                 inputText = inputText.substring(0, 1).toUpperCase() + inputText.substring(1).toLowerCase();
+                // Zoekt naam, 3 letter code en 1 letter code op in aminoMap.
                 String[] result = aminoMap.getNames(inputText);
                 System.out.println(Arrays.toString(result));
+                // Plaatst resultaten in de juiste JTextFields.
                 fullName.setText(result[0]);
                 threeLetter.setText(result[1]);
                 oneLetter.setText(result[2]);
@@ -46,14 +48,19 @@ public class AminoApp extends JFrame {
         c.gridx = 0;
         c.gridy++;
         c.anchor = GridBagConstraints.WEST;
+        window.add(new JLabel("Name:"));
+        c.gridx++;
         window.add(fullName, c);
+        c.gridy++;
+        c.gridx = 0;
+        window.add(new JLabel("3 letter:"));
         c.gridx++;
-        c.anchor = GridBagConstraints.CENTER;
         window.add(threeLetter, c);
+        c.gridy++;
+        c.gridx = 0;
+        window.add(new JLabel("1 letter:"));
         c.gridx++;
-        c.anchor = GridBagConstraints.EAST;
         window.add(oneLetter, c);
-
 
         pack();
         setVisible(true);
