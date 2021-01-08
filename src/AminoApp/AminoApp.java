@@ -5,9 +5,9 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class AminoApp extends JFrame {
-    private Container window;
-    private JTextField oneLetter, threeLetter, fullName, inputField;
-    private AminoMap aminoMap = new AminoMap();
+    private final Container window;
+    private final JTextField oneLetter, threeLetter, fullName, inputField;
+    private final AminoMap aminoMap = new AminoMap();
 
     public AminoApp() {
         window = getContentPane();

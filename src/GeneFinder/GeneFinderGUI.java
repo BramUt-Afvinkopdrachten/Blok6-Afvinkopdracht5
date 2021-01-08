@@ -80,10 +80,19 @@ public class GeneFinderGUI extends JFrame {
         GeneFinderGUI app = new GeneFinderGUI();
     }
 
+    /**
+     * Maakt een HashSet van alle genen in een gegeven jTextArea
+     * @param jTextArea TextArea met genen.
+     * @return HashSet met genen uit TextArea.
+     */
     public HashSet<String> readContents(JTextArea jTextArea){
         return new HashSet<>(Arrays.asList(jTextArea.getText().split("[ \n\t]+")));
     }
 
+    /**
+     * Action listener voor de JComboBox. Zet de overlappende genen van de geselecteerde JTextAreas in commonArea.
+     * @param e ActionEvent
+     */
     public void boxListener(ActionEvent e){
         HashSet<String> commonGenes;
         String selected = (String) selectionBox.getSelectedItem();
@@ -113,11 +122,17 @@ public class GeneFinderGUI extends JFrame {
         commonArea.setText(String.join("\n", commonGenes));
     }
 
+    /**
+     * Actionlistener voor filechooser buttons. OPent een filechoose en plaatst path in een JTextArea.
+     * @param jTextArea Area waar de path van het bestand in moet komen staan.
+     */
     public void buttonListener(JTextArea jTextArea) {
+        // Opent filechooser.
         fileChooser.showOpenDialog(null);
         File file = fileChooser.getSelectedFile();
         if (file != null) {
             try {
+                // Plaats path in jTextArea.
                 jTextArea.setText(readFile(file.getAbsolutePath()));
             } catch (IOException ioException) {
                 JOptionPane.showMessageDialog(null, ioException.getMessage());
@@ -125,6 +140,12 @@ public class GeneFinderGUI extends JFrame {
         }
     }
 
+    /**
+     * Leest een bestand met per regel de naam van een gen, returnt deze als een enkelen String.
+     * @param filepath Path naar de te lezen file.
+     * @return String met genen.
+     * @throws IOException Als de file niet gevonden/geopend kan worden.
+     */
     public static String readFile(String filepath) throws IOException {
         String line;
         StringBuilder content = new StringBuilder();
